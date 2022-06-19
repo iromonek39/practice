@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="filter">filter</div>
+    <div id="genre">genre</div>
+    <div id="days">days</div>
+<script>
+const arr = [
+    {
+        genre: ['j-pop', 'classic', 'rock']
+    },
+    {
+        genre: ['classic', 'jaz']
+    },
+    {
+        genre: ['classic', 'rap']
+    }
+]
+const condition = ['rock', 'rap']
+const result = arr.filter((data) => {
+    return condition.reduce((prev, current) => {
+        console.log(prev) // 前の評価が次に引き継がれる（最初は初期値に指定した値がくる）
+        console.log(current)
+        return prev || data.genre.includes(current)
+    }, false)
+})
+console.log(result)
+
+const sample = [
+    {
+        genre: ['j-pop', 'classic', 'rock'],
+        days: ['1', '30']
+    },
+    {
+        genre: ['classic', 'jaz'],
+        days: ['9', '13', '27']
+    },
+    {
+        genre: ['classic', 'rap'],
+        days: ['14', '22', '27']
+    }
+]
+let filterArr = []
+
+const genre = ['rock', 'rap']
+const days = ['13', '27']
+
+const filterBtn = document.getElementById('filter')
+const genreBtn = document.getElementById('genre')
+const daysBtn = document.getElementById('days')
+
+genreBtn.addEventListener('click', () => {
+    filterArr = reduceArr(sample, genre, 'genre')
+    console.log(filterArr)
+})
+daysBtn.addEventListener('click', () => {
+    filterArr = reduceArr(filterArr, days, 'days')
+    console.log(filterArr)
+})
+
+const reduceArr = (filterArr, reducerArr, type) => {
+    return filterArr.filter((data) => {
+        return reducerArr.reduce((prev, current) => {
+            return prev || data[type].includes(current)
+        }, false)
+    })
+}
+
+</script>
+</body>
+</html>
