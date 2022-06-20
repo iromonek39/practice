@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="filter">filter</div>
+    <div id="genre">genre</div>
+    <div id="days">days</div>
+<script>
+// const arr = [
+//     {
+//         data:[
+//             {
+//                 genre: ['rock','rap','classic','j-pop','classic','rap']
+//             },
+//             {
+//                 genre: ['jazz']
+//             },
+//         ]
+//     },
+//     {
+//         data:[
+//             {
+//                 genre: ['classic','rap','classic','rap']
+//             },
+//             {
+//                 genre: ['classic','j-pop','classic','j-pop']
+//             }
+//         ]
+//     }
+// ]
+
+// const condition = ['rock','rap']
+
+// const result = arr.map((el)=>{
+//     return el.data.filter((c)=>{
+//         return c.genre.some((g)=>condition.includes(g))
+//     })
+// })
+// console.log(result)
+
+const arr = [
+    {
+        data:[
+            {
+                genre: ['rock','rap','classic','j-pop','classic','rap']
+            },
+            {
+                genre: ['jazz']
+            },
+        ]
+    },
+    {
+        data:[
+            {
+                genre: ['classic','rap','classic','rap']
+            }
+        ]
+    }
+]
+
+const condition = ['rock','rap']
+
+const result = arr.filter((el)=>{
+    return condition.reduce((prev,current,index)=>{
+        console.log('index', index)
+        return prev||el.data.reduce((p,c,i)=>{
+            console.log({p})
+            console.log({c})
+            console.log({i})
+            return p||c.genre.includes(current)
+        },false)
+    },false)
+})
+console.log(result)
+</script>
+</body>
+</html>
